@@ -45,5 +45,11 @@ impl<T, U> Monad<U> for Option<T> {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let option = Option::<i32>::pure(42);
+
+    let option = option.bind(|value| Some(value * 2));
+    assert_eq!(option, Some(84));
+
+    let option = option.map(|value| value / 2);
+    assert_eq!(option, Some(42));
 }
