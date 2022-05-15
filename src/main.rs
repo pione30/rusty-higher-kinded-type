@@ -10,6 +10,13 @@ trait Functor<U>: HKT<U> {
         F: FnOnce(Self::C) -> U;
 }
 
+trait Monad<U>: Functor<U> {
+    fn pure(value: U) -> Self::MU;
+    fn bind<F>(self, f: F) -> Self::MU
+    where
+        F: FnOnce(Self::C) -> Self::MU;
+}
+
 impl<T, U> HKT<U> for Option<T> {
     type C = T;
     type MU = Option<U>;
