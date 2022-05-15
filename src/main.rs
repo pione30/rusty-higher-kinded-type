@@ -31,6 +31,19 @@ impl<T, U> Functor<U> for Option<T> {
     }
 }
 
+impl<T, U> Monad<U> for Option<T> {
+    fn pure(value: U) -> Option<U> {
+        Some(value)
+    }
+
+    fn bind<F>(self, f: F) -> Option<U>
+    where
+        F: FnOnce(T) -> Option<U>,
+    {
+        self.and_then(f)
+    }
+}
+
 fn main() {
     println!("Hello, world!");
 }
