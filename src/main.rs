@@ -15,6 +15,15 @@ impl<T, U> HKT<U> for Option<T> {
     type MU = Option<U>;
 }
 
+impl<T, U> Functor<U> for Option<T> {
+    fn map<F>(self, f: F) -> Option<U>
+    where
+        F: FnOnce(T) -> U,
+    {
+        self.map(f)
+    }
+}
+
 fn main() {
     println!("Hello, world!");
 }
